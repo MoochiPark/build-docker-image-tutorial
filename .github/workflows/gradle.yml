@@ -43,6 +43,7 @@ jobs:
   delploy:
 
     runs-on: self-hosted
+    environment: hello
 
     steps:
     - uses: actions/checkout@v3
@@ -54,4 +55,4 @@ jobs:
     - name: Build Image with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: bootBUildImage
+        arguments: bootBuildImage
