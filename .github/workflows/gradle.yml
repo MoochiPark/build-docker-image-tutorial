@@ -55,4 +55,6 @@ jobs:
     - name: $DOCKER_ID Build Image with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: bootBuildImage
+        arguments: DOCKER_ID=${{ secrets.DOCKER_ID }} \ 
+          DOCKER_REPOSITORY=${{ secrets.DOCKER_REPOSITORY }} \
+          DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} bootBuildImage
