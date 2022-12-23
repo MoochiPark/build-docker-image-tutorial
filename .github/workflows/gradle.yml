@@ -70,3 +70,4 @@ jobs:
     - name: Deploy to local minikube
       run:
         kubectl apply -f src/main/resources/k8s/hello-deploy-cicd.yml
+
