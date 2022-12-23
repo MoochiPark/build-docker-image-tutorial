@@ -40,10 +40,9 @@ jobs:
       with:
         junit_files: "build/test-results/**/*.xml"
 
-  delploy:
+  delivery:
 
     runs-on: self-hosted
-    environment: hello
 
     steps:
     - uses: actions/checkout@v3
@@ -52,7 +51,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: $DOCKER_ID Build Image with Gradle
+    - name: Build Image with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       env:
         DOCKER_ID: ${{ secrets.DOCKER_ID }} 
@@ -60,3 +59,14 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
       with:
         arguments: bootBuildImage
+        
+
+  deployment:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to local minikube
+      run:
+        kubectl apply -f src/main/resources/k8s/hello-deploy-cicd.yml
